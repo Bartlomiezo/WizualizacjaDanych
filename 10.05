@@ -1,0 +1,16 @@
+import numpy as np
+import pandas as pd
+#ZAD1
+imiona=pd.ExcelFile('imiona.xlsx')
+df=pd.read_excel(imiona,header=0)
+print(df)
+#ZAD2
+print(df[df.Liczba>1000])
+print(df[df.Imie=="BARTŁOMIEJ"])
+print(df["Liczba"].sum())
+print(df.loc[df['Rok'].isin([2000,2001,2002,2003,2004,2005]),'Liczba'].sum())
+print(df.loc[(df['Plec']=="M"),"Liczba"].sum())
+print(df.loc[(df['Plec']=="K"),"Liczba"].sum())
+print(df.groupby(["Rok","Plec"]).apply(lambda x: x.nlargest(1,'Liczba')))
+suma=df.groupby(["Imie","Plec"])["Liczba"].sum()
+print(suma)
